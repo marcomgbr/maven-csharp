@@ -1,4 +1,4 @@
-# Optimizing Software Development with Best Practices in Modularization and Dependency Management
+# Optimizing Software Development with Modularization and Dependency Management
 
 By [Marco Aurélio Oliveira](https://maurelio.com.br)
 
