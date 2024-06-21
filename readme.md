@@ -16,7 +16,7 @@ Tools like Visual Studio allow the creation of solutions with multiple projects 
 ## Effective Solutions: Maven and Alternatives
 In the Java ecosystem, Maven stands out by facilitating binary compartmentalization and reuse. Inspired by this approach, I sought a similar solution for version control in C#, which can also be adapted for other languages and IDEs.
 
-# Getting Started with Maven to C#
+# Getting Started with Maven for C#
 Keeping this example as simple as possible, inheritance of POM files was not used.
 ## A Project without Dependencies - PrimaryDLL
 1. Install and configure Maven on your computer.
