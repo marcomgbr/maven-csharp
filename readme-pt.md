@@ -1,5 +1,5 @@
 ###### [<img src="flag-us.png" alt="English">](readme.md)
-# Otimizando o Desenvolvimento de Software com Boas Práticas de Modularização e Gerenciamento de Dependências
+# Otimizando o Desenvolvimento de Software com Modularização e Gerenciamento de Dependências
 
 By [Marco Aurélio Oliveira](https://maurelio.com.br)
 
