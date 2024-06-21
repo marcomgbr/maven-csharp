@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="PrimaryDLL">
+      <HintPath>lib\netstandard2.0\PrimaryDLL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="lib\netstandard2.0\PrimaryDLL.dll">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!--<Target Name="CopyDependenciesDebug" BeforeTargets="PreBuildEvent"  Condition="'$(Configuration)' == 'Debug'">
+    <Exec Command="mvn validate -P debug" />
+  </Target>
+  <Target Name="CopyDependenciesRelease" BeforeTargets="PreBuildEvent"  Condition="'$(Configuration)' == 'Release'">
+    <Exec Command="mvn validate" />
+  </Target>-->
+  
+</Project>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>maurelio-com-br</groupId>
+    <artifactId>primary-dll</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <url>https://maurelio.com.br</url>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--<intermediate.dir>${project.basedir}/src/main/resources</intermediate.dir>-->
+        <intermediate.dir>${project.basedir}/target/classes</intermediate.dir>
+        <library.dir>${project.basedir}/lib</library.dir>
+    </properties>
+    
+    <profiles>
+        <!-- Usage: mvn some-phase -P release/debug -->
+        <profile>
+            <id>release</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <resource.dir>${project.basedir}/bin/Release</resource.dir>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>debug</id>
+            <properties>
+                <resource.dir>${project.basedir}/bin/Debug</resource.dir>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>download-dependencies</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${library.dir}</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>prepare-for-package</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>${intermediate.dir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${resource.dir}</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>clean-directories</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <delete dir="${library.dir}"/>
+                                <delete dir="${intermediate.dir}"/>
+                                <delete dir="${project.build.directory}"/>
+                                <!--<delete dir="${project.basedir}/src"/> --> <!--FOR TESTS-->
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>check-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <fail message="No distributable files found at ${resource.dir}. Aborting build!">
+                                    <condition>
+                                        <not>
+                                            <available file="${resource.dir}" type="dir" />
+                                        </not>
+                                    </condition>
+                                </fail>
+                                <fail message="No files to package found at ${intermediate.dir}. Aborting build!">
+                                    <condition>
+                                        <not>
+                                            <available file="${intermediate.dir}" type="dir" />
+                                        </not>
+                                    </condition>
+                                </fail>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    
+    <dependencies>
+    </dependencies>
+</project>
