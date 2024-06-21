@@ -129,5 +129,5 @@ After that, developers can execute `mvn deploy` to make their libraries availabl
 
 ## Final Considerations
 - **Tip:** Maven's automatic execution can be manually adjusted on demand, saving a few seconds of processing time when immediate data sharing with other developers is not necessary. It's all about adjusting workflows to fit your needs.
-- During tests, the mvn clean validate -P [release/debug] command prevents JAR files with "junk" possibly generated in previous executions from being generated.
+- During tests, the `mvn clean validate -P [release/debug]` command prevents JAR files with "junk" possibly generated in previous executions from being generated.
 - A good coding standard replaces a lot of unnecessary documentation and facilitates collaboration and maintenance. Maven archetypes aim to achieve this.
