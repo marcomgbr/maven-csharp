@@ -1,3 +1,4 @@
+###### [<img src="flag-br.png" alt="Portugu&ecirc;s">](readme-pt.md)
 # Optimizing Software Development with Modularization and Dependency Management
 
 By [Marco Aurélio Oliveira](https://maurelio.com.br)
